@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SDK 로딩 테스트</title>
+  <script src="https://js.tosspayments.com/v2/payment-widget"></script>
+</head>
+<body>
+  <h2>🔍 Toss Payment SDK 로딩 테스트</h2>
+  <div id="status">SDK 로딩 중...</div>
+
+  <script>
+    if (typeof PaymentWidget !== "undefined") {
+      document.getElementById("status").textContent = "✅ PaymentWidget 로딩 성공!";
+    } else {
+      document.getElementById("status").textContent = "❌ PaymentWidget 로딩 실패 (차단됨)";
+    }
+  </script>
+</body>
+</html>

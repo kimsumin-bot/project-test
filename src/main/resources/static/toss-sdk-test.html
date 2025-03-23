@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Toss Payment SDK 테스트</title>
+  <script>
+    const script = document.createElement('script');
+    script.src = "https://js.tosspayments.com/v2/payment-widget";
+    script.onload = () => {
+      console.log("✅ Toss SDK 로딩 성공");
+
+      const widget = PaymentWidget("test_ck_ma60RZblrqN5m0lz1je68wzYWBn1", PaymentWidget.ANONYMOUS);
+      widget.renderPaymentMethods("#payment-method", { value: 10000 });
+
+      window.pay = function () {
+        widget.requestPayment({
+          orderId: "test-order-001",
+          orderName: "테스트 상품",
+          amount: 10000,
+          successUrl: "http://localhost:8080/success.html",
+          failUrl: "http://localhost:8080/fail.html"
+        });
+      };
+    };
+    script.onerror = () => {
+      alert("❌ Toss 결제 위젯 로딩 실패! 네트워크 또는 브라우저 환경을 확인하세요.");
+    };
+    document.head.appendChild(script);
+  </script>
+</head>
+<body>
+  <h2>Toss 결제 위젯 테스트</h2>
+  <div id="payment-method" style="margin-bottom: 20px;"></div>
+  <button onclick="pay()">💳 결제하기</button>
+</body>
+</html>
